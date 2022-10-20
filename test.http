@@ -1,0 +1,29 @@
+### GET request with parameter
+GET http://localhost:8000/api/personalidades
+Accept: application/json
+
+### GET request with parameter
+GET http://localhost:8000/api/personalidades/1
+Accept: application/json
+
+### GET request with parameter
+DELETE http://localhost:8000/api/personalidades/1
+Accept: application/json
+
+### POST request with parameter
+POST http://localhost:8000/api/personalidades/1
+Content-Type: application/json
+
+{
+    "nome": "rua1",
+    "historia": "historia"
+}
+
+### PUT request with parameter
+PUT http://localhost:8000/api/personalidades/1
+Content-Type: application/json
+
+{
+  "nome": "rua1",
+  "historia": "historia nova"
+}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/tonnytg/go-apirest/database"
 	"github.com/tonnytg/go-apirest/models"
 	"github.com/tonnytg/go-apirest/routes"
 )
@@ -11,6 +12,8 @@ func main() {
 		{ID: 1, Nome: "A1", Historia: "B1"},
 		{ID: 2, Nome: "A2", Historia: "B2"},
 	}
+
+	database.Connector()
 
 	routes.HandleRequest()
 }
