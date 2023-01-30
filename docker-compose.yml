@@ -12,8 +12,8 @@ services:
       - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
 
   pgadmin-compose:
-    image: dpage/pgadmin4
-    enviromnet:
+    image: "dpage/pgadmin4"
+    environment:
       PGADMIN_DEFAULT_EMAIL: "meu@email.com"
       PGADMIN_DEFAULT_PASSWORD: "password"
     ports:
