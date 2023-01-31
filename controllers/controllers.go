@@ -25,6 +25,14 @@ func RetornaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func CriaUmaNovaPersonalidade(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Criando")
+}
+
+func DeletaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Deletando")
+}
+
 func TodasPersonalidades(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(models.Personaliades)
 }

@@ -9,11 +9,11 @@ import (
 func main() {
 
 	models.Personaliades = []models.Personalidade{
-		{ID: 1, Nome: "A1", Historia: "B1"},
-		{ID: 2, Nome: "A2", Historia: "B2"},
+		{ID: 3, Nome: "A1", Historia: "B1"},
+		{ID: 4, Nome: "A2", Historia: "B2"},
 	}
 
-	database.Connector()
+	db := new(database.Db)
 
 	routes.HandleRequest()
 }
