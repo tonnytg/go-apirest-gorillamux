@@ -6,12 +6,23 @@ import (
 	"net/http"
 	"strconv"
 
+	_ "github.com/golang-jwt/jwt"
 	"github.com/gorilla/mux"
 	"github.com/tonnytg/go-apirest/models"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Home Page")
+}
+
+// Create Token with Json
+func Token(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	body := r.Body
+	var user models.User
+	json.NewDecoder(body).Decode(&user)
+	token := models.CreateToken(user.Username, user.Password)
+	json.NewEncoder(w).Encode(token)
 }
 
 func RetornaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
