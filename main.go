@@ -1,19 +1,31 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"github.com/tonnytg/go-apirest/database"
 	"github.com/tonnytg/go-apirest/models"
 	"github.com/tonnytg/go-apirest/routes"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main() {
 
-	models.Personaliades = []models.Personalidade{
-		{ID: 3, Nome: "A1", Historia: "B1"},
-		{ID: 4, Nome: "A2", Historia: "B2"},
+	models.Personalities = []models.Personality{
+		{ID: 1, Name: "A11", History: "B11"},
+		{ID: 2, Name: "A22", History: "B22"},
 	}
 
 	db := new(database.Db)
+	db.Connector().Save(models.Personalities)
 
-	routes.HandleRequest()
+	PORT := os.Getenv("ENV_PORT")
+	if PORT == "" {
+		PORT = "8080"
+	}
+
+	r := mux.NewRouter()
+	routes.LoadHandlers(r)
+	log.Fatal(http.ListenAndServe(":8081", r))
 }

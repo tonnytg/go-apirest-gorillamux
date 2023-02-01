@@ -5,10 +5,10 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-type Personalidade struct {
-	ID       int    `json:"id"`
-	Nome     string `json:"nome"`
-	Historia string `json:"historia"`
+type Personality struct {
+	ID      int    `json:"id"`
+	Name    string `json:"name"`
+	History string `json:"history"`
 }
 
 type User struct {
@@ -16,7 +16,7 @@ type User struct {
 	Password string `json:"password"`
 }
 
-var Personaliades []Personalidade
+var Personalities []Personality
 
 var CreateToken = func(u string, p string) string {
 

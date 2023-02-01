@@ -12,7 +12,7 @@ type Db struct {
 
 func (db *Db) Connector() *gorm.DB {
 	// dns postgres
-	dsn := "host=localhost user=root password=root dbname=Names port=5432 sslmode=disable"
+	dsn := "host=localhost user=root password=root dbname=personalitities port=5432 sslmode=disable"
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
