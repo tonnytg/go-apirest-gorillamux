@@ -8,10 +8,15 @@ import (
 
 type ProductHandlers struct {
 	CreateProductUseCase *usecase.CreateProductUseCase
-	ListProductUseCase   *usecase.ListProductsUseCase
+	ListProductsUseCase  *usecase.ListProductsUseCase
 }
 
-func NewProductHandlers(createProductUseCase *usecase.CreateProductUseCase, listProductsUserCase *usecase.List)
+func NewProductHandlers(createProductUseCase *usecase.CreateProductUseCase, listProductsUseCase *usecase.ListProductsUseCase) *ProductHandlers {
+	return &ProductHandlers{
+		CreateProductUseCase: createProductUseCase,
+		ListProductsUseCase:  listProductsUseCase,
+	}
+}
 
 func (p *ProductHandlers) CreateProductHandler(w http.ResponseWriter, r *http.Request) {
 	var input usecase.CreateProductInputDto
@@ -30,7 +35,13 @@ func (p *ProductHandlers) CreateProductHandler(w http.ResponseWriter, r *http.Re
 	json.NewEncoder(w).Encode(output)
 }
 
-func (p *ProductHandlers) ListProductsHandlers(w http.ResponseWriter, r *http.Request) {
+func (p *ProductHandlers) ListProductsHandler(w http.ResponseWriter, r *http.Request) {
 	output, err := p.ListProductsUseCase.Execute()
-
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(output)
 }
