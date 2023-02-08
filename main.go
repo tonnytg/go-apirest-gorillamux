@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/tonnytg/go-apirest/database"
-	"github.com/tonnytg/go-apirest/models"
-	"github.com/tonnytg/go-apirest/routes"
+	"github.com/tonnytg/go-apirest/internal/database"
+	"github.com/tonnytg/go-apirest/pkg/api/models"
+	"github.com/tonnytg/go-apirest/pkg/api/routes"
 	"log"
 	"net/http"
 	"os"

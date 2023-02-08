@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tonnytg/go-apirest/pkg/api/models"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +12,6 @@ import (
 
 	_ "github.com/golang-jwt/jwt"
 	"github.com/gorilla/mux"
-	"github.com/tonnytg/go-apirest/models"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {

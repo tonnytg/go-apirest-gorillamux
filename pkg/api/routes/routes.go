@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/tonnytg/go-apirest/controllers"
+	"github.com/tonnytg/go-apirest/pkg/api/controllers"
 )
 
 func LoadHandlers(r *mux.Router) {
