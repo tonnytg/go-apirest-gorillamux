@@ -10,9 +10,16 @@ type Db struct {
 	DB *gorm.DB
 }
 
-func (db *Db) Connector() *gorm.DB {
+func (db *Db) Connector(dbName string) *gorm.DB {
+	
 	// dns postgres
-	dsn := "host=localhost user=root password=root dbname=personalitities port=5432 sslmode=disable"
+	host := "localhost"
+	user := "root"
+	password := "root"
+	port := 5432
+	sslmode := "disable"
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s", host, user, password, dbName, port, sslmode)
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)

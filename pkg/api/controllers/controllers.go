@@ -3,7 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tonnytg/go-apirest/pkg/api/models"
+	"github.com/tonnytg/go-apirest/internal/entity"
 	"log"
 	"net/http"
 	"os"
@@ -28,7 +28,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func Token(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	body := r.Body
-	var user models.User
+	var user entity.User
 	json.NewDecoder(body).Decode(&user)
 	if user.Username == "" || user.Password == "" {
 		log.Printf("[%s] %s - Username or password is empty", r.RemoteAddr, r.Method)
@@ -36,7 +36,7 @@ func Token(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Username or password is empty\n")
 		return
 	}
-	token := models.CreateToken(user.Username, user.Password)
+	token := entity.CreateToken(user.Username, user.Password)
 	log.Printf("[%s] %s - Token created", r.RemoteAddr, r.Method)
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(token)
@@ -54,7 +54,7 @@ func GetPersonality(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	for _, personality := range models.Personalities {
+	for _, personality := range entity.Personalities {
 		if strconv.Itoa(personality.ID) == id {
 			json.NewEncoder(w).Encode(personality)
 		}
@@ -72,5 +72,5 @@ func DeletePersonality(w http.ResponseWriter, r *http.Request) {
 }
 
 func AllPersonalities(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.Personalities)
+	json.NewEncoder(w).Encode(entity.Personalities)
 }
