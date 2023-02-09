@@ -6,20 +6,35 @@ import (
 	"gorm.io/gorm"
 )
 
+type Config struct {
+	Host     string
+	User     string
+	Password string
+	Port     int
+	DbName   string
+	SSLMode  string
+}
+
 type Db struct {
 	DB *gorm.DB
 }
 
-func (db *Db) Connector(dbName string) *gorm.DB {
-	
-	// dns postgres
-	host := "localhost"
-	user := "root"
-	password := "root"
-	port := 5432
-	sslmode := "disable"
+func NewDB() *Db {
+	return &Db{}
+}
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s", host, user, password, dbName, port, sslmode)
+func (db *Db) Connector(c Config) *gorm.DB {
+
+	// dns postgres
+	c.Host = "localhost"
+	c.User = "root"
+	c.Password = "root"
+	c.Port = 5432
+	c.SSLMode = "disable"
+
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%d sslmode=%s",
+		c.Host, c.User, c.Password, c.DbName, c.Port, c.SSLMode)
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)

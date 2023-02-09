@@ -13,8 +13,16 @@ func main() {
 		{ID: 2, Name: "A22", History: "B22"},
 	}
 
+	confDB1 := database.Config{
+		Host:     "localhost",
+		Port:     5432,
+		User:     string("root"),
+		Password: string("root"),
+		DbName:   string("personalities"),
+		SSLMode:  string("disable"),
+	}
 	db := new(database.Db)
-	db.Connector("personalities").Save(entity.Personalities)
+	db.Connector(confDB1).Save(entity.Personalities)
 
 	api.StartServer()
 }
