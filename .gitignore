@@ -1,3 +1,8 @@
 # IDE
 .idea
 .DS_*
+
+#DB
+*.db
+*db
+db*

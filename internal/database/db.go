@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 )
 
 type Config struct {
@@ -37,7 +38,7 @@ func (db *Db) Connector(c Config) *gorm.DB {
 		c.Host, c.User, c.Password, c.DbName, c.Port, c.SSLMode)
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(err)
+		log.Default().Fatal(err)
 	}
 	return DB
 }
